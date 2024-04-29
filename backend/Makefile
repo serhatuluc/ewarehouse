@@ -1,4 +1,4 @@
-.PHONY: install run migrate migrations superuser test update
+.PHONY: install run migrate migrations superuser test update format
 
 install:
 	   poetry install
@@ -19,4 +19,7 @@ test:
 	   poetry run python manage.py test
 
 update: install migrate
-	   
+
+format:
+		pre-commit run --all-files
+
