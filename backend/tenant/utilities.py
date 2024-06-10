@@ -1,6 +1,5 @@
 from .models import Tenant
 
-
 def get_hostname(request):
     return request.get_host().split(":")[0].lower()
 

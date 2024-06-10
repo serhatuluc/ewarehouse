@@ -3,11 +3,9 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.files.images import get_image_dimensions
 
-
 class Tenant(models.Model):
     name = models.CharField(max_length=255)
     subdomain = models.CharField(max_length=255)
-
 
 # class TenantAwareModel(models.Model):
 #     tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE)
