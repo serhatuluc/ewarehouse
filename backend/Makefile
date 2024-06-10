@@ -1,7 +1,10 @@
-.PHONY: install run migrate migrations superuser test update format
+.PHONY: install run migrate migrations superuser test update format add
 
 install:
 	   poetry install
+
+add:
+	   poetry add $(arg) # Usage is like : make add arg=NAME_OF_THE_MODULE
 
 run: 
 	   poetry run python manage.py runserver 
