@@ -1,15 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import HomeScreen from './screens/HomeScreen';
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./pages/layout/Layout";
+import Home from "./pages/Home";
+
+import Store from "./pages/Store";
 
 function App() {
   return (
-   <div>
-      <main>
-        <HomeScreen/>
-      </main>
-   </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="store" element={<Store />} />
+
+          {/* <Route path="blogs" element={<Blogs />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="*" element={<NoPage />} /> */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
