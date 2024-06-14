@@ -1,9 +1,11 @@
 // import React from 'react';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import '../css/style.css';
-import { Link } from "react-router-dom"; // Use this if you are using React Router
+import { Link, useLocation } from "react-router-dom"; // Use this if you are using React Router
 
 function Header() {
+  const location = useLocation();
+
   return (
     <div className="site-navbar py-2">
       <div className="search-wrap">
@@ -36,10 +38,10 @@ function Header() {
               role="navigation"
             >
               <ul className="site-menu js-clone-nav d-none d-lg-block">
-                <li className="active">
+                <li className={location.pathname === "/" ? "active" : ""}>
                   <Link to="/">Home</Link>
                 </li>
-                <li>
+                <li className={location.pathname === "/store" ? "active" : ""}>
                   <Link to="/store">Store</Link>
                 </li>
                 {/* <li className="has-children">

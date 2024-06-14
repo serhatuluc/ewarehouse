@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import axios from "axios";
 import Product from "../components/Product";
-import { ProductProps } from "../types";
 
 function Store() {
   const [products, setProducts] = useState([]);
@@ -20,8 +19,8 @@ function Store() {
     <div className="site-section bg-light">
       <div className="container">
         <div className="row">
-          {products.map((product: any, index: number) => (
-            <Product key={index} item={product} />
+          {products.map((product: any) => (
+            <Product key={product.id} item={product} />
           ))}
         </div>
         <div className="row mt-5">
