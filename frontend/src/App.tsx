@@ -4,6 +4,7 @@ import Layout from "./pages/layout/Layout";
 import Home from "./pages/Home";
 
 import Store from "./pages/Store";
+import SingleProduct from "./pages/SingleProduct";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="store" element={<Store />} />
+          <Route path="product/:productId" element={<SingleProduct />} />
 
           {/* <Route path="blogs" element={<Blogs />} />
           <Route path="contact" element={<Contact />} />
