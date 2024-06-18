@@ -25,7 +25,7 @@ const Home: React.FC = () => {
                 </div>
               </div>
               <p>
-                <a href="#" className="btn btn-primary px-5 py-3">
+                <a href="/store" className="btn btn-primary px-5 py-3">
                   Shop Now
                 </a>
               </p>

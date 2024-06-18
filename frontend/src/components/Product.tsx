@@ -5,7 +5,7 @@ function Product({ item }: ProductProps) {
   return (
     <div className="col-sm-6 col-lg-4 text-center item mb-4 item-v2">
       {item.is_on_sale && <span className="onsale">İNDİRİM</span>}
-      <Link to={`/product/${item.name}`} state={{ product: item }}>
+      <Link to={`/product/${item.id}`} state={{ product: item }}>
         <img src={item.image} alt={item.name} />
         <h3 className="text-dark">{item.name}</h3>
         <p className="price">

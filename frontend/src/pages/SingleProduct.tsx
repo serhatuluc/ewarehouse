@@ -1,16 +1,47 @@
-import React, { useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link,  useParams } from "react-router-dom";
+import { ProductOrderingInformation, ProductProps, ProductSpecification, ProductType } from "../types";
 
-const SingleProduct: React.FC = () => {
+function SingleProduct() {
+  const hostname = window.location.hostname;
+  const subdomain = hostname.split(".")[0]; // assuming your site is at tenantone.example.com
   const [quantity, setQuantity] = useState<number>(0);
 
   const handleQuantityChange = (amount: number) => {
     setQuantity((prev) => Math.max(0, prev + amount));
   };
 
-  const location = useLocation();
-  const { product } = location.state;
   const { productId } = useParams();
+
+  const [product, setProduct] = useState<ProductType>();
+  const [productSpesifications, setProductSpesifications] = useState<ProductSpecification[]>([]);
+  const [productOrderingInformations, setProductOrderingInformations] = useState<ProductOrderingInformation[]>([]);
+
+  useEffect(() => {
+    axios
+      .get<ProductType>(`http://${subdomain}.example.com:8000/api/products/${productId}`)
+      .then((res) => setProduct(res.data))
+      .catch((err) => console.error(err));
+  }, [productId]);
+
+  useEffect(() => {
+    axios
+      .get<ProductSpecification[]>(`http://${subdomain}.example.com:8000/api/products/spesifications/${productId}`)
+      .then((res) => setProductSpesifications(res.data))
+      .catch((err) => console.error(err));
+  }, [productId]);
+
+  useEffect(() => {
+    axios
+      .get<ProductOrderingInformation[]>(`http://${subdomain}.example.com:8000/api/products/ordering-informations/${productId}`)
+      .then((res) => setProductOrderingInformations(res.data))
+      .catch((err) => console.error(err));
+  }, [productId]);
+
+  if (!product) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -41,11 +72,7 @@ const SingleProduct: React.FC = () => {
             <div className="col-md-6">
               <h2 className="text-black">{ product.name }</h2>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Pariatur, vitae, explicabo? Incidunt facere, natus soluta
-                dolores iusto! Molestiae expedita veritatis nesciunt doloremque
-                sint asperiores fuga voluptas, distinctio, aperiam, ratione
-                dolore.
+                {product.contents}
               </p>
               <p className="text-primary h4">
                 {product.sale_price ? (
@@ -139,34 +166,17 @@ const SingleProduct: React.FC = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row">OTC022401</th>
-                          <td>
-                            Pain Management: Acetaminophen PM Extra-Strength
-                            Caplets, 500 mg, 100/Bottle
-                          </td>
-                          <td>1 BT</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">OTC022401</th>
-                          <td>
-                            Pain Management: Acetaminophen PM Extra-Strength
-                            Caplets, 500 mg, 100/Bottle
-                          </td>
-                          <td>144/CS</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">OTC022401</th>
-                          <td>
-                            Pain Management: Acetaminophen PM Extra-Strength
-                            Caplets, 500 mg, 100/Bottle
-                          </td>
-                          <td>1 EA</td>
-                        </tr>
+                        {productOrderingInformations.map((info, index) => (
+                          <tr key={index}>
+                            <td>{info.material}</td>
+                            <td>{info.description}</td>
+                            <td>{info.packaging}</td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </div>
-                  <div
+                    <div
                     className="tab-pane fade"
                     id="pills-profile"
                     role="tabpanel"
@@ -174,22 +184,12 @@ const SingleProduct: React.FC = () => {
                   >
                     <table className="table custom-table">
                       <tbody>
-                        <tr>
-                          <td>HPIS CODE</td>
-                          <td className="bg-light">999_200_40_0</td>
-                        </tr>
-                        <tr>
-                          <td>HEALTHCARE PROVIDERS ONLY</td>
-                          <td className="bg-light">No</td>
-                        </tr>
-                        <tr>
-                          <td>LATEX FREE</td>
-                          <td className="bg-light">Yes, No</td>
-                        </tr>
-                        <tr>
-                          <td>MEDICATION ROUTE</td>
-                          <td className="bg-light">Topical</td>
-                        </tr>
+                        {productSpesifications.map((spec, index) => (
+                          <tr key={index}>
+                            <td>{spec.key}</td>
+                            <td className="bg-light">{spec.value}</td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </div>

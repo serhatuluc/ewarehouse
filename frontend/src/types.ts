@@ -12,3 +12,14 @@ export interface ProductType {
 export interface ProductProps {
   item: ProductType;
 }
+
+export interface ProductSpecification {
+  key: string;
+  value: string;
+}
+
+export interface ProductOrderingInformation {
+  material: string;
+  description: string;
+  packaging: string;
+}
