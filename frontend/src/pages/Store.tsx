@@ -1,25 +1,23 @@
-import { useEffect, useState } from "react";
-import { Col, Row } from "react-bootstrap";
-import axios from "axios";
 import Product from "../components/Product";
+import { useAppDispach, useAppSelector } from "../hooks";
+import { fetchProducts } from "../features/product/productsSlice";
+import { ProductType } from "../types";
+import { useEffect } from "react";
 
 function Store() {
-  const [products, setProducts] = useState([]);
+
+  const products = useAppSelector((state) => state.products.items);
+  const dispatch = useAppDispach();
 
   useEffect(() => {
-    const hostname = window.location.hostname;
-    const subdomain = hostname.split(".")[0]; // assuming your site is at tenantone.example.com
-
-    axios
-      .get(`http://${subdomain}.example.com:8000/api/products/`)
-      .then((res) => setProducts(res.data));
-  }, []);
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   return (
     <div className="site-section bg-light">
       <div className="container">
         <div className="row">
-          {products.map((product: any) => (
+          {products.map((product: ProductType) => (
             <Product key={product.id} item={product} />
           ))}
         </div>
