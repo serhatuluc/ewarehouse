@@ -49,8 +49,8 @@ function SingleProduct() {
         <div className="container">
           <div className="row">
             <div className="col-md-12 mb-0">
-              <Link to="/">Home</Link> <span className="mx-2 mb-0">/</span>
-              <Link to="/store">Store</Link> <span className="mx-2 mb-0">/</span>
+              <Link to="/">Ana Sayfa</Link> <span className="mx-2 mb-0">/</span>
+              <Link to="/store">İlaçlar</Link> <span className="mx-2 mb-0">/</span>
               <strong className="text-black">{ product.name }</strong>
             </div>
           </div>
@@ -77,10 +77,10 @@ function SingleProduct() {
               <p className="text-primary h4">
                 {product.sale_price ? (
                   <>
-                    <del>${product.price}</del> &mdash; ${product.sale_price}
+                    ₺ <del>{product.price}</del> &mdash; ₺{product.sale_price}
                   </>
                 ) : (
-                  <>${product.price}</>
+                  <>₺{product.price}</>
                 )}
               </p>
 
@@ -113,7 +113,7 @@ function SingleProduct() {
                   href="cart.html"
                   className="buy-now btn btn-sm height-auto px-4 py-3 btn-primary"
                 >
-                  Add To Cart
+                  Sepete Ekle
                 </a>
               </p>
 
@@ -133,7 +133,7 @@ function SingleProduct() {
                       aria-controls="pills-home"
                       aria-selected="true"
                     >
-                      Ordering Information
+                     Ürün Bilgileri
                     </a>
                   </li>
                   <li className="nav-item">
@@ -146,7 +146,7 @@ function SingleProduct() {
                       aria-controls="pills-profile"
                       aria-selected="false"
                     >
-                      Specifications
+                     Ürün Detayları
                     </a>
                   </li>
                 </ul>
@@ -160,9 +160,9 @@ function SingleProduct() {
                     <table className="table custom-table">
                       <thead>
                         <tr>
-                          <th>Material</th>
-                          <th>Description</th>
-                          <th>Packaging</th>
+                          <th>Malzeme</th>
+                          <th>Açıklama</th>
+                          <th>Paketleme</th>
                         </tr>
                       </thead>
                       <tbody>

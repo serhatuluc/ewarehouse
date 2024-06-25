@@ -39,10 +39,10 @@ function Header() {
             >
               <ul className="site-menu js-clone-nav d-none d-lg-block">
                 <li className={location.pathname === "/" ? "active" : ""}>
-                  <Link to="/">Home</Link>
+                  <Link to="/">Ana Sayfa</Link>
                 </li>
                 <li className={location.pathname === "/store" ? "active" : ""}>
-                  <Link to="/store">Store</Link>
+                  <Link to="/store">İlaçlar</Link>
                 </li>
                 {/* <li className="has-children">
                   <a href="#">Products</a>
@@ -62,10 +62,10 @@ function Header() {
                   </ul>
                 </li> */}
                 <li>
-                  <Link to="/about">About</Link>
+                  <Link to="/about">Hakkımızda</Link>
                 </li>
                 <li>
-                  <Link to="/contact">Contact</Link>
+                  <Link to="/contact">İletişim</Link>
                 </li>
               </ul>
             </nav>
