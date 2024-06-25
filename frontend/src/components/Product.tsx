@@ -11,10 +11,10 @@ function Product({ item }: ProductProps) {
         <p className="price">
           {item.sale_price ? (
             <>
-              <del>${item.price}</del> &mdash; ${item.sale_price}
+              ₺ <del>{item.price}</del> &mdash; ₺{item.sale_price}
             </>
           ) : (
-            <>${item.price}</>
+            <>₺{item.price}</>
           )}
         </p>
       </Link>

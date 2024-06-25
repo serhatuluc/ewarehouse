@@ -11,7 +11,7 @@ function Footer() {
           <div className="col-md-6 col-lg-4 mb-4 mb-lg-0">
             <div className="block-7">
               <h3 className="footer-heading mb-4">
-                About <strong className="text-primary">Pharmative</strong>
+                <strong className="text-primary">Pharmative</strong>
               </h3>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
@@ -39,7 +39,7 @@ function Footer() {
           </div>
           <div className="col-md-6 col-lg-3">
             <div className="block-5 mb-5">
-              <h3 className="footer-heading mb-4">Contact Info</h3>
+              <h3 className="footer-heading mb-4">İletişim</h3>
               <ul className="list-unstyled">
                 <li className="address">
                   203 Fake St. Mountain View, San Francisco, California, USA
