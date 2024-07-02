@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "tenant",
     "rest_framework",
     "corsheaders",
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,9 @@ CORS_ALLOW_ALL_ORIGINS = True
 MEDIA_URL = "media/"
 # This is where media files will be stored
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
