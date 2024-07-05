@@ -1,28 +1,42 @@
-.PHONY: install run migrate migrations superuser test update format add
+.PHONY: install run migrate migrations migration superuser test update format add dry_run shell
+
+PRP = poetry run python
 
 install:
-	   poetry install
+	poetry install
 
 add:
-	   poetry add $(arg) # Usage is like : make add arg=NAME_OF_THE_MODULE
+	# Usage: make add arg=NAME_OF_THE_MODULE
+	poetry add $(arg) 
 
 run: 
-	   poetry run python manage.py runserver 
+	$(PRP) manage.py runserver 
 
 migrate:
-	   poetry run python manage.py migrate
+	$(PRP) manage.py migrate
 
 migrations:
-	   poetry run python manage.py makemigrations
+	$(PRP) manage.py makemigrations
+
+migration:
+	$(PRP) manage.py makemigrations $(app)
+
+dry_run:
+	# Display what the migration will actually look like 
+	# without creating the migration file
+	$(PRP) manage.py makemigrations --dry-run --verbosity 3
 
 superuser:
-	   poetry run python manage.py createsuperuser
+	$(PRP) manage.py createsuperuser
 
 test:
-	   poetry run python manage.py test
+	$(PRP) manage.py test
 
-update: install migrate
+update: 
+	install migrate
 
 format:
-		pre-commit run --all-files
+	pre-commit run --all-files
 
+shell:
+	$(PRP) manage.py shell
