@@ -1,7 +1,8 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { ProductType } from '../../types';
-
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+import { ProductType } from "../../types";
+import { fetchFromSubdomain } from "../../utils/Api";
+import { HttpMethods } from "../../types";
 
 interface ProductsState {
   items: ProductType[];
@@ -15,16 +16,18 @@ const initialState: ProductsState = {
   error: null,
 };
 
-// Create async thunk for fetching products from an API
-export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
-  const hostname = window.location.hostname;
-  const subdomain = hostname.split(".")[0]; // assuming your site is at tenantone.example.com
-  const response = await axios.get<ProductType[]>(`http://${subdomain}.example.com:8000/api/products/`);
-  return response.data;
-});
+export const fetchProducts = createAsyncThunk(
+  "products/fetchProducts",
+  async () => {
+    const data: ProductType[] = await fetchFromSubdomain<ProductType[]>(
+      "api/products/"
+    );
+    return data;
+  }
+);
 
 const productsSlice = createSlice({
-  name: 'products',
+  name: "products",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -39,7 +42,7 @@ const productsSlice = createSlice({
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || 'Failed to fetch products';
+        state.error = action.error.message || "Failed to fetch products";
       });
   },
 });
