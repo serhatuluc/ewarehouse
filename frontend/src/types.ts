@@ -1,5 +1,5 @@
 export interface ProductType {
-  id: number
+  id: number;
   name: string;
   image: string;
   price: string;
@@ -22,4 +22,17 @@ export interface ProductOrderingInformation {
   material: string;
   description: string;
   packaging: string;
+}
+
+export enum HttpMethods {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  DELETE = "DELETE",
+  PATCH = "PATCH",
+}
+
+export interface TokenType {
+  access: string;
+  refresh: string;
 }
