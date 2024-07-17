@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { userLogin } from "../features/auth/authActions";
 import { useNavigate } from "react-router-dom";
+import Register from "./Register";
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -19,29 +20,30 @@ const Login: React.FC = () => {
     }
   }, [navigate, userInfo]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.stopPropagation();
+    } else {
+      const loginData = {
+        email,
+        password,
+      };
+      dispatch(userLogin(loginData));
     }
     form.classList.add("was-validated");
-
-    const loginData = {
-      email,
-      password,
-    };
-    dispatch(userLogin(loginData));
   };
   return (
     <div className="container mt-5" style={{ maxWidth: "415px" }}>
       <div className="text-center mb-4">
-        <h5 >İday’a giriş yap veya hesap oluştur!</h5>
+        <h5>İday’a giriş yap veya hesap oluştur!</h5>
       </div>
       <div className="d-flex justify-content-center mb-3">
         <button
-          className={`btn ${isLoginActive ? "btn-secondary" : "btn-light"
-            } me-2`}
+          className={`btn ${
+            isLoginActive ? "btn-secondary" : "btn-light"
+          } me-2`}
           aria-pressed={isLoginActive}
           onClick={() => setIsLoginActive(true)}
         >
@@ -57,7 +59,12 @@ const Login: React.FC = () => {
       </div>
       {isLoginActive ? (
         <div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleLogin}>
+            {error && (
+              <div className="alert alert-danger" role="alert">
+                E-posta adresiniz ve/veya şifreniz hatalı.
+              </div>
+            )}
             <div className="mb-3">
               <label htmlFor="login-email" className="form-label">
                 E-Posta
@@ -113,12 +120,7 @@ const Login: React.FC = () => {
           </form>
         </div>
       ) : (
-        // Signup form goes here
-        <div>
-          <form className="needs-validation" noValidate onSubmit={handleSubmit}>
-            {/* Signup form fields */}
-          </form>
-        </div>
+        <Register />
       )}
       <div className="text-center mt-3"></div>
     </div>

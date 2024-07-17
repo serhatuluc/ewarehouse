@@ -3,9 +3,10 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { HttpMethods } from "../types";
 
-interface ApiRequestConfig extends AxiosRequestConfig {
-  data?: any; // For POST, PUT, PATCH, and other methods that send a payload
-}
+interface ApiResponse {
+  response?: any
+} 
+
 
 export const fetchFromSubdomain = async <T>(
   endpoint: string,
@@ -21,7 +22,7 @@ export const fetchFromSubdomain = async <T>(
   const subdomain = hostname.split(".")[0]; // assuming your site is at tenantone.example.com
   const url = `http://${subdomain}.example.com:8000/${endpoint}`;
 
-  const requestConfig: ApiRequestConfig = {
+  const requestConfig = {
     url,
     method,
     ...config,
@@ -34,8 +35,19 @@ export const fetchFromSubdomain = async <T>(
   try {
     const response = await axios.request<T>(requestConfig);
     return response.data;
-  } catch (error) {
-    console.error(`Error fetching data from ${url}:`, error);
-    throw error;
+  } catch (error: any) {
+    let errorResponse: ApiResponse = {};
+    
+    if (error.response) {
+      errorResponse = {
+        response: error.response
+      };
+    } else if (error.request) {
+      errorResponse = { response: 'No response received' };
+    } else {
+      errorResponse = { response: 'Error: ' + error.message };
+    }
+    
+    return Promise.reject(errorResponse);
   }
 };
