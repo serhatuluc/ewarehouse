@@ -1,10 +1,12 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./pages/layout/Layout";
+import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
 
 import Store from "./pages/Store";
 import SingleProduct from "./pages/SingleProduct";
+import Login from "./pages/Login";
+import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
   return (
@@ -12,12 +14,21 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="store" element={<Store />} />
-          <Route path="product/:productId" element={<SingleProduct />} />
+          <Route
+            path="store"
+            element={
+              <PrivateRoute><Store /></PrivateRoute>
+            }
+          />
+          <Route
+            path="product/:productId"
+            element={
+              <PrivateRoute><SingleProduct /></PrivateRoute>
+            }
+          />
+          <Route path="/login" element={<Login />} />
 
-          {/* <Route path="blogs" element={<Blogs />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="*" element={<NoPage />} /> */}
+          {/* <Route path="*" element={<NoPage />} /> */}
         </Route>
       </Routes>
     </BrowserRouter>

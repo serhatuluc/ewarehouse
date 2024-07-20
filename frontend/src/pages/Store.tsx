@@ -1,5 +1,5 @@
 import Product from "../components/Product";
-import { useAppDispach, useAppSelector } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../hooks";
 import { fetchProducts } from "../features/product/productsSlice";
 import { ProductType } from "../types";
 import { useEffect } from "react";
@@ -7,7 +7,7 @@ import { useEffect } from "react";
 function Store() {
 
   const products = useAppSelector((state) => state.products.items);
-  const dispatch = useAppDispach();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchProducts());
