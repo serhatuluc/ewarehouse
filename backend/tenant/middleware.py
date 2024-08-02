@@ -14,8 +14,8 @@ class TenantMiddleware:
         tenant = self.get_tenant(request)
         if tenant:
             request.tenant = tenant
-        else:
-            return HttpResponseBadRequest("Invalid tenant")
+       # else:
+        #    return HttpResponseBadRequest("Invalid tenant")
 
         response = self.get_response(request)
         return response
