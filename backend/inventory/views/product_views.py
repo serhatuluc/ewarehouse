@@ -1,11 +1,10 @@
-from tenant.models import Product, ProductOrderingInformations, ProductSpesifications
+from inventory.models import Product, ProductOrderingInformations, ProductSpesifications
 from tenant.utils import get_tenant
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-
-from tenant.serializers import (
+from inventory.serializers import (
     ProductOrderingInformationsSerializer,
     ProductSerializer,
     ProductSpesificationsSerializer,
