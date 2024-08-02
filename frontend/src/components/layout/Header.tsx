@@ -70,8 +70,8 @@ const Header: React.FC = () => {
                   <span className="number">2</span>
                 </Link>
 
-                //This iplementation is not correct!!!
-                // Look at Console
+                {/* //This iplementation is not correct!!!
+                // Look at Console */}
                 <Link to="/profile" className="icons-btn d-inline-block user">
                   <div className="main-nav d-inline-block">
                     <nav className="site-navigation text-right text-md-center" role="navigation">
