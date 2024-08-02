@@ -1,13 +1,27 @@
 import { Link, useLocation } from "react-router-dom";
-import { useAppSelector } from "../../hooks";
+import { useEffect } from "react";
+
+import { useAppSelector, useAppDispatch } from "../../hooks";
+import { useGetUserProfileQuery } from "../../utils/ApiService";
+import { logout, setCredentials } from "../../features/auth/authSlice";
 
 const Header: React.FC = () => {
   const location = useLocation();
   const user = useAppSelector((state) => state.auth.userInfo);
-  const logoutUser: React.MouseEventHandler<HTMLLIElement> = (e) => {
-    e.preventDefault();
-    // Add your logout logic here
+  const dispatch = useAppDispatch();
+  // const { data } = useGetUserProfileQuery("userDetails", {
+  //   // perform a refetch every 15mins * 60 second * 1000 milisecond
+  //   pollingInterval: 900000,
+  // });
+
+  // useEffect(() => {
+  //   if (data) dispatch(setCredentials(data));
+  // }, [data, dispatch]);
+
+  const handleLogout = () => {
+    dispatch(logout());
   };
+
   const tenantName: string = "İDAY";
   const middle: number = Math.ceil(tenantName.length / 2);
 
@@ -44,9 +58,6 @@ const Header: React.FC = () => {
                     <li>
                       <Link to="/contact">İletişim</Link>
                     </li>
-                    <li>
-                      <Link to="/about">Çıkış Yap</Link>
-                    </li>
                   </ul>
                 </nav>
               </div>
@@ -58,12 +69,28 @@ const Header: React.FC = () => {
                   <span className="icon-shopping-bag"></span>
                   <span className="number">2</span>
                 </Link>
-                <a
-                  href="#"
-                  className="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"
-                >
-                  <span className="icon-menu"></span>
-                </a>
+
+                {/* //This iplementation is not correct!!!
+                // Look at Console */}
+                <Link to="/profile" className="icons-btn d-inline-block user">
+                  <div className="main-nav d-inline-block">
+                    <nav className="site-navigation text-right text-md-center" role="navigation">
+                      <ul className="site-menu js-clone-nav d-inline-block">
+                        <li className="has-children">
+                          <span className="icon-user "></span>
+                          <ul className="dropdown">
+                            <li><a href="#">Hesabım</a></li>
+                            <li><a href="#">Siparişlerim</a></li>
+                            <li>
+                              <a href="#" className="logout-link" onClick={handleLogout}>Çıkış Yap</a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </Link>
+                
               </div>
               <div className="search-wrap">
                 <div className="container">

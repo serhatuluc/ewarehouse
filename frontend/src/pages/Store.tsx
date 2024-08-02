@@ -4,20 +4,23 @@ import { fetchProducts } from "../features/product/productsSlice";
 import { ProductType } from "../types";
 import { useEffect } from "react";
 
+import { useGetTenantProductsQuery } from "../utils/ApiService";
+
 function Store() {
 
-  const products = useAppSelector((state) => state.products.items);
+  // const products = useAppSelector((state) => state.products.items);
+  const { data: products } = useGetTenantProductsQuery();
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchProducts());
+  // }, [dispatch]);
 
   return (
     <div className="site-section bg-light">
       <div className="container">
         <div className="row">
-          {products.map((product: ProductType) => (
+          {products?.map((product: ProductType) => (
             <Product key={product.id} item={product} />
           ))}
         </div>

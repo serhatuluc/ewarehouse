@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { ProductType } from "../../types";
 import { fetchFromSubdomain } from "../../utils/Api";
 import { HttpMethods } from "../../types";
@@ -20,7 +20,7 @@ export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
     const data: ProductType[] = await fetchFromSubdomain<ProductType[]>(
-      "api/products/"
+      "api/products/",
     );
     return data;
   }
