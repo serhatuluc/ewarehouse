@@ -1,5 +1,3 @@
-// src/utils/api.ts
-
 import axios, { AxiosRequestConfig } from "axios";
 import { HttpMethods } from "../types";
 

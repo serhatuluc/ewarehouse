@@ -5,8 +5,12 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 
+from .models import CustomUser
 from .serializers import CustomUserSerializer
+from .serializers import ProfileSerializer
 
 
 class LoginView(APIView):
@@ -54,3 +58,13 @@ class RegisterView(APIView):
                         {"error": "GLN zaten kayıtlı."},
                         status=status.HTTP_400_BAD_REQUEST,
                     )
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getProfile(request) -> Response:
+    try:
+        user_email = request.data['email']
+        serializer = ProfileSerializer(user_email)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except CustomUser.DoesNotExist:
+        return Response({"error": "Kullanıcı bulunamadı."}, status=status.HTTP_404_NOT_FOUND)
