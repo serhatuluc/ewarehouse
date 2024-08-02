@@ -1,45 +1,24 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link,  useParams } from "react-router-dom";
-import { ProductOrderingInformation, ProductProps, ProductSpecification, ProductType } from "../types";
+import {useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import {
+  useGetSingleProductQuery,
+  useGetProductSpesificationsQuery,
+  useGetProductOrderInfoQuery,
+} from "../utils/ApiService";
 
 function SingleProduct() {
-  const hostname = window.location.hostname;
-  const subdomain = hostname.split(".")[0]; // assuming your site is at tenantone.example.com
   const [quantity, setQuantity] = useState<number>(0);
 
   const handleQuantityChange = (amount: number) => {
     setQuantity((prev) => Math.max(0, prev + amount));
   };
 
-  const { productId } = useParams();
+  const { productId } = useParams<{ productId: string }>();
+  const {data: product } = useGetSingleProductQuery(productId || '1');
+  const {data: productSpesifications } = useGetProductSpesificationsQuery(productId || '1');
+  const {data: productOrderingInformations } = useGetProductOrderInfoQuery(productId || '1');
 
-  const [product, setProduct] = useState<ProductType>();
-  const [productSpesifications, setProductSpesifications] = useState<ProductSpecification[]>([]);
-  const [productOrderingInformations, setProductOrderingInformations] = useState<ProductOrderingInformation[]>([]);
-
-  useEffect(() => {
-    axios
-      .get<ProductType>(`http://${subdomain}.example.com:8000/api/products/${productId}`)
-      .then((res) => setProduct(res.data))
-      .catch((err) => console.error(err));
-  }, [productId]);
-
-  useEffect(() => {
-    axios
-      .get<ProductSpecification[]>(`http://${subdomain}.example.com:8000/api/products/spesifications/${productId}`)
-      .then((res) => setProductSpesifications(res.data))
-      .catch((err) => console.error(err));
-  }, [productId]);
-
-  useEffect(() => {
-    axios
-      .get<ProductOrderingInformation[]>(`http://${subdomain}.example.com:8000/api/products/ordering-informations/${productId}`)
-      .then((res) => setProductOrderingInformations(res.data))
-      .catch((err) => console.error(err));
-  }, [productId]);
-
-  if (!product) {
+  if (!product || !productSpesifications || !productOrderingInformations) {
     return <div>Loading...</div>;
   }
 
@@ -50,8 +29,9 @@ function SingleProduct() {
           <div className="row">
             <div className="col-md-12 mb-0">
               <Link to="/">Ana Sayfa</Link> <span className="mx-2 mb-0">/</span>
-              <Link to="/store">İlaçlar</Link> <span className="mx-2 mb-0">/</span>
-              <strong className="text-black">{ product.name }</strong>
+              <Link to="/store">İlaçlar</Link>{" "}
+              <span className="mx-2 mb-0">/</span>
+              <strong className="text-black">{product.name}</strong>
             </div>
           </div>
         </div>
@@ -70,10 +50,8 @@ function SingleProduct() {
               </div>
             </div>
             <div className="col-md-6">
-              <h2 className="text-black">{ product.name }</h2>
-              <p>
-                {product.contents}
-              </p>
+              <h2 className="text-black">{product.name}</h2>
+              <p>{product.contents}</p>
               <p className="text-primary h4">
                 {product.sale_price ? (
                   <>
@@ -91,7 +69,9 @@ function SingleProduct() {
                       className="btn btn-outline-primary"
                       type="button"
                       onClick={() => handleQuantityChange(-1)}
-                    >-</button>
+                    >
+                      -
+                    </button>
                   </div>
                   <input
                     type="text"
@@ -104,7 +84,9 @@ function SingleProduct() {
                       className="btn btn-outline-primary"
                       type="button"
                       onClick={() => handleQuantityChange(1)}
-                    >+</button>
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
               </div>
@@ -133,7 +115,7 @@ function SingleProduct() {
                       aria-controls="pills-home"
                       aria-selected="true"
                     >
-                     Ürün Bilgileri
+                      Ürün Bilgileri
                     </a>
                   </li>
                   <li className="nav-item">
@@ -146,7 +128,7 @@ function SingleProduct() {
                       aria-controls="pills-profile"
                       aria-selected="false"
                     >
-                     Ürün Detayları
+                      Ürün Detayları
                     </a>
                   </li>
                 </ul>
@@ -176,7 +158,7 @@ function SingleProduct() {
                       </tbody>
                     </table>
                   </div>
-                    <div
+                  <div
                     className="tab-pane fade"
                     id="pills-profile"
                     role="tabpanel"
@@ -201,6 +183,6 @@ function SingleProduct() {
       </div>
     </div>
   );
-};
+}
 
 export default SingleProduct;
