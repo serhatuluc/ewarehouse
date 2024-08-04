@@ -43,13 +43,6 @@ function App() {
             }
           />
           <Route path="/login" element={<Login />} />
-          <Route
-            path="profile/"
-            element={
-              <PrivateRoute><Profile/></PrivateRoute>
-            }
-          />
-          <Route path="/login" element={<Login />} />
 
           {/* <Route path="*" element={<NoPage />} /> */}
         </Route>
