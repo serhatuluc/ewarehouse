@@ -7,6 +7,7 @@ import Store from "./pages/Store";
 import SingleProduct from "./pages/SingleProduct";
 import Login from "./pages/Login";
 import PrivateRoute from "./utils/PrivateRoute";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -24,6 +25,13 @@ function App() {
             path="product/:productId"
             element={
               <PrivateRoute><SingleProduct /></PrivateRoute>
+            }
+          />
+          <Route path="/cart" element={<Login />} />
+          <Route
+            path="cart/"
+            element={
+              <PrivateRoute><Cart /></PrivateRoute>
             }
           />
           <Route path="/login" element={<Login />} />
