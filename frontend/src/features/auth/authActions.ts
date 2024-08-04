@@ -30,7 +30,6 @@ export const userLogin = createAsyncThunk(
       localStorage.setItem("userTokens", JSON.stringify(response));
       return response;
     } catch (error: any) {
-      console.log('err ', error)
       return rejectWithValue(error.response.data.detail);
     }
   }
