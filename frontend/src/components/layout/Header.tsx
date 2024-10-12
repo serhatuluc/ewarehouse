@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 import { useAppSelector, useAppDispatch } from "../../hooks";
-import { useGetUserProfileQuery } from "../../utils/ApiService";
+import { useGetOrderItemNumberQuery, useGetUserProfileQuery } from "../../utils/ApiService";
 import { logout, setCredentials } from "../../features/auth/authSlice";
 
 const Header: React.FC = () => {
@@ -17,6 +17,8 @@ const Header: React.FC = () => {
   // useEffect(() => {
   //   if (data) dispatch(setCredentials(data));
   // }, [data, dispatch]);
+
+  const { data: orderItemNumber } = useGetOrderItemNumberQuery();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -67,7 +69,7 @@ const Header: React.FC = () => {
                 </a>
                 <Link to="/cart" className="icons-btn d-inline-block bag">
                   <span className="icon-shopping-bag"></span>
-                  <span className="number">2</span>
+                  <span className="number">{orderItemNumber}</span>
                 </Link>
 
                 {/* //This iplementation is not correct!!!

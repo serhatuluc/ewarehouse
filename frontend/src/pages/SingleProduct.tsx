@@ -4,10 +4,14 @@ import {
   useGetSingleProductQuery,
   useGetProductSpesificationsQuery,
   useGetProductOrderInfoQuery,
+  useGetOrderItemNumberQuery,
 } from "../utils/ApiService";
+import { useAppDispatch } from "../hooks";
+import { createOrderItems } from "../features/order/orderSlice";
 
 function SingleProduct() {
-  const [quantity, setQuantity] = useState<number>(0);
+  const [qty, setQuantity] = useState<number>(0);
+  const dispatch = useAppDispatch();
 
   const handleQuantityChange = (amount: number) => {
     setQuantity((prev) => Math.max(0, prev + amount));
@@ -17,6 +21,18 @@ function SingleProduct() {
   const {data: product } = useGetSingleProductQuery(productId || '1');
   const {data: productSpesifications } = useGetProductSpesificationsQuery(productId || '1');
   const {data: productOrderingInformations } = useGetProductOrderInfoQuery(productId || '1');
+  const { data: orderItemNumber, refetch } = useGetOrderItemNumberQuery();
+
+   const saveOrderItem = async () => {
+    const orderItem = {
+      productId,
+      qty,
+    };
+
+    await dispatch(createOrderItems(orderItem));
+    refetch();
+  };
+
 
   if (!product || !productSpesifications || !productOrderingInformations) {
     return <div>Loading...</div>;
@@ -76,7 +92,7 @@ function SingleProduct() {
                   <input
                     type="text"
                     className="form-control text-center"
-                    value={quantity}
+                    value={qty}
                     readOnly
                   />
                   <div className="input-group-append">
@@ -91,12 +107,12 @@ function SingleProduct() {
                 </div>
               </div>
               <p>
-                <a
-                  href="cart.html"
+                <button
                   className="buy-now btn btn-sm height-auto px-4 py-3 btn-primary"
+                  onClick={() => saveOrderItem()}
                 >
                   Sepete Ekle
-                </a>
+                </button>
               </p>
 
               <div className="mt-5">

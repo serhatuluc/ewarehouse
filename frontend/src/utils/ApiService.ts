@@ -1,10 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "./BaseQuery";
 import {
+  OrderItemType,
   ProductOrderingInformation,
   ProductProps,
   ProductSpecification,
   ProductType,
+  UserOrderItemsType,
 } from "../types";
 
 export const authApi = createApi({
@@ -41,6 +43,18 @@ export const authApi = createApi({
         mehthod: "GET",
       }),
     }),
+    getOrderItemNumber: builder.query<number, void>({
+      query: () => ({
+        url: `api/orders/getOrderItemNumber/`,
+        mehthod: "GET",
+      }),
+    }),
+    getUserOrderItems: builder.query<UserOrderItemsType[], void>({
+      query: () => ({
+        url: `api/orders/getOrderItems/`,
+        mehthod: "GET",
+      }),
+    }),
   }),
 });
 
@@ -50,4 +64,6 @@ export const {
   useGetSingleProductQuery,
   useGetProductSpesificationsQuery,
   useGetProductOrderInfoQuery,
+  useGetOrderItemNumberQuery,
+  useGetUserOrderItemsQuery,
 } = authApi;

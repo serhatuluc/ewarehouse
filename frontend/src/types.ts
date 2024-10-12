@@ -9,8 +9,24 @@ export interface ProductType {
   contents: string;
 }
 
+export interface OrderItemType {
+  productId: string | undefined;
+  qty: number;
+}
+
+export interface UserOrderItemsType {
+  productId: string | undefined;
+  qty: number;
+  product: ProductType;
+  price: number;
+}
+
 export interface ProductProps {
   item: ProductType;
+}
+
+export interface OrderItemProps {
+  item: OrderItemType;
 }
 
 export interface ProductSpecification {
