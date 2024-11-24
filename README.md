@@ -15,7 +15,7 @@
 Technology    | Version
 ------------- | -------------
 Django |  5.0.4
-React          |  18.3.1
+[![React][React.js]][React-url]         |  18.3.1
 PostgreSql    |  14.5 
 
 Libraries     | 
@@ -95,4 +95,8 @@ It can be assumed as active and passive.
 <br></br>
 
 
-![](screenshots/ER.png)
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+
