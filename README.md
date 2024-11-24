@@ -14,8 +14,8 @@
 
 Technology    | Version
 ------------- | -------------
-Visual Studio |  2019
-.Net          |  5.0
+Django |  5.0.4
+React          |  18.3.1
 PostgreSql    |  14.5 
 
 Libraries     | 
