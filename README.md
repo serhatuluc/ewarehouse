@@ -18,9 +18,9 @@ Technology    | Version
 [![React][React.js]][React-url]         |  18.3.1
 [![PostgreSql][PostgreSql]][PostgreSql-url]    |  14.5 
 
-Libraries     | 
+Tools     | 
 ------------- | 
-FluentValidation |
+[![Bootstrap][Bootstrap]][Bootstrap-url] |
 AutoMapper          | 
 NHibernate    |
 Hangfire    |
@@ -103,4 +103,6 @@ It can be assumed as active and passive.
 [Django-url]: https://www.djangoproject.com/
 [PostgreSql]: https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white
 [PostgreSql-url]: https://www.postgresql.org/
+[Bootstrap]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com/
 
