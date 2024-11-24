@@ -8,7 +8,7 @@
 
 :arrow_right: With new features it will be a platform for pharmacies to meet their any needs
 
-
+<br></br>
 
 <h2>Technologies</h2>
 
