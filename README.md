@@ -24,11 +24,13 @@ Tools     |
 [![Redux][Redux]][Redux-url]         | 
 [![Poetry][Poetry]][Poetry-url]     |
 [![PyTest][PyTest]][PyTest-url]     |
+[![Anaconda][Anaconda]][Anaconda-url]     |
+
 
 
 <br></br>
 
-<h2>Getting Started</h2>
+<h2>Technical Details</h2>
 
 :one: Arrange NHibernate Configuration
 
@@ -107,4 +109,6 @@ It can be assumed as active and passive.
 [Poetry-url]: https://python-poetry.org/
 [PyTest]: https://img.shields.io/badge/pytest-%23ffffff.svg?style=for-the-badge&logo=pytest&logoColor=2f9fe3
 [PyTest-url]: https://docs.pytest.org/en/stable/
+[Anaconda]: https://img.shields.io/badge/Anaconda-%2344A833.svg?style=for-the-badge&logo=anaconda&logoColor=white
+[Anaconda-url]: https://docs.pytest.org/en/stable/](https://anaconda.org/
 
