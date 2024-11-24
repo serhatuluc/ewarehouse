@@ -33,6 +33,12 @@ Tools     |
 <h2>Technical Details</h2>
 
 :one: Multitenant Architecture
+* Since we target more than one organization we should have come up with a multi-tenant application that will be easy to implement and use lower resources as much as possible. 
+* We search through the internet and find out different strategies for multi tenancy. We prefer to apply row-based data segregation.
+
+
+  **Row-based data segregation:**  
+  It is a strategy used in multi-tenant architectures where each tenant's data is stored in the same database tables, but each row includes a tenant identifier to ensure data segregation. This approach requires careful design and implementation to ensure that data access and security are properly enforced.
 
 
 <br></br>
