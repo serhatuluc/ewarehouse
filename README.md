@@ -1,93 +1,98 @@
-# ewarehouse
+<h1>E-WAREHOUSE</h1>
+
+<h2>Why?</h2>
+
+:arrow_right: Offers pharmaceutical warehouses to market their products to pharmacies
+
+:arrow_right: Aims to be a platform for pharmacies to exchange their medicines which is a legal activity that is regulated by The Republic of Türkiye Ministry of Health
+
+:arrow_right: With new features it will be a platform for pharmacies to meet their any needs
 
 
 
-## Getting started
+<h2>Technologies</h2>
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Technology    | Version
+------------- | -------------
+Visual Studio |  2019
+.Net          |  5.0
+PostgreSql    |  14.5 
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Libraries     | 
+------------- | 
+FluentValidation |
+AutoMapper          | 
+NHibernate    |
+Hangfire    |
+SeriLog    | 
+Nunit    |
+Moq    |
+Mailkit    | 
 
-## Add your files
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+<br></br>
 
+<h2>Getting Started</h2>
+
+:one: Arrange NHibernate Configuration
+
+Change password and database name in configuration with your own settings
+
+ ```"ConnectionStrings": {
+    "PostgreSqlConnection": "User ID=postgres;Password=YourMasterPasswordForPostgre;Server=localhost;Port=5432;Database=YourDatabaseName;Integrated Security=true;Pooling=true;"
+  },
+  ```
+
+:two: Adding Admin to database
+
+Insert admin to database using sql query below. As it can be seen password is hashed.
+
+This is the information needed to log in as admin -> ``` UserName = Admin , Password = Admin123 ```
+
+```mysql
+INSERT INTO account (id , name, username,email,password,role,lastactivity) 
+VALUES ( 1, 'Admin', 'Admin','Admin@gmail.com','e64b78fc3bc91bcbc7dc232ba8ec59e0','Admin','2022-09-17 21:53:16.2522')
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/devops9004209/ewarehouse.git
-git branch -M main
-git push -uf origin main
-```
+<br></br>
 
-## Integrate with your tools
+<h2>Structure of Project</h2>
 
-- [ ] [Set up project integrations](https://gitlab.com/devops9004209/ewarehouse/-/settings/integrations)
+In this project, Onion Architecture has been applied as an example of Clean Archtitecture . Firstly, I should have to give credit [Güven Barış Çakan](https://github.com/guvenbaris) and his fellows [Kader Uzuner](https://github.com/KaderUzuner) and [Osman Mahmut Cepoğlu](https://github.com/osmanmahmutcepoglu) since they were an inspiration for
+me to prefer using Onion Architecture.
 
-## Collaborate with your team
+In Onion Architecture, deeper the layer the fewer dependency it has. Deepest layer which is Domain has no dependency. The layer on Domain which is Application layer has dependency to domain. So outer layer are allowed to reference the layers that are directly below them.   
+<br></br>
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+[<img src="https://miro.medium.com/max/640/1*0Pg6_UsaKiiEqUV3kf2HXg.png">](http://google.com.au/)
 
-## Test and Deploy
 
-Use the built-in continuous integration in GitLab.
+**Domain layer**
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+:arrow_right:Domain has no dependency. It holds application domain objects. Entities are placed here.
+<br></br>
 
-***
 
-# Editing this README
+**Application layer**
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+:arrow_right:Application layer holds interfaces and services. Bussiness logic is implemented in this layer. Service interface are kept seperate to ensure loose coupling.
+<br></br>
 
-## Suggestions for a good README
+**Persistence Layer**
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+:arrow_right:Migrations and database configuration is implemented in this layer. No bussiness logic ismplemented. Only this layer knows database.
+<br></br>
 
-## Name
-Choose a self-explaining name for your project.
+**Infrastructure Layer**
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+:arrow_right:Log and email service is configured here. No bussiness logic is implemented.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+<br></br>
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+<h2>ER Diagram</h2>
+:arrow_right: Both offer and product has Status field. Status field is true by default. If product is sold or offer is disapproved then status will be false. 
+It can be assumed as active and passive.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+<br></br>
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+![](screenshots/ER.png)
