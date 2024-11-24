@@ -14,7 +14,7 @@
 
 Technology    | Version
 ------------- | -------------
-Django |  5.0.4
+[![Django][Django]][Django-url]   |  5.0.4
 [![React][React.js]][React-url]         |  18.3.1
 PostgreSql    |  14.5 
 
@@ -99,4 +99,6 @@ It can be assumed as active and passive.
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
+[Django]: https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green
+[Django-url]: https://www.djangoproject.com/
 
