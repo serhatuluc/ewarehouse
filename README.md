@@ -32,7 +32,7 @@ Tools     |
 
 <h2>Technical Details</h2>
 
-:one: Arrange NHibernate Configuration
+:one: Multitenant Architecture
 
 Change password and database name in configuration with your own settings
 
