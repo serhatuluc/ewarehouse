@@ -16,7 +16,7 @@ Technology    | Version
 ------------- | -------------
 [![Django][Django]][Django-url]   |  5.0.4
 [![React][React.js]][React-url]         |  18.3.1
-[![PostgreSql][PostgreSql]][React-url]    |  14.5 
+[![PostgreSql][PostgreSql]][PostgreSql-url]    |  14.5 
 
 Libraries     | 
 ------------- | 
