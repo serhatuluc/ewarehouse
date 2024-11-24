@@ -34,63 +34,47 @@ Tools     |
 
 :one: Multitenant Architecture
 
-Change password and database name in configuration with your own settings
 
- ```"ConnectionStrings": {
-    "PostgreSqlConnection": "User ID=postgres;Password=YourMasterPasswordForPostgre;Server=localhost;Port=5432;Database=YourDatabaseName;Integrated Security=true;Pooling=true;"
-  },
+<br></br>
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+* npm
+  ```sh
+  npm install npm@latest -g
   ```
 
-:two: Adding Admin to database
+### Installation
 
-Insert admin to database using sql query below. As it can be seen password is hashed.
+_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-This is the information needed to log in as admin -> ``` UserName = Admin , Password = Admin123 ```
+1. Get a free API Key at [https://example.com](https://example.com)
+2. Clone the repo
+   ```sh
+   git clone https://github.com/github_username/repo_name.git
+   ```
+3. Install NPM packages
+   ```sh
+   npm install
+   ```
+4. Enter your API in `config.js`
+   ```js
+   const API_KEY = 'ENTER YOUR API';
+   ```
+5. Change git remote url to avoid accidental pushes to base project
+   ```sh
+   git remote set-url origin github_username/repo_name
+   git remote -v # confirm the changes
+   ```
 
-```mysql
-INSERT INTO account (id , name, username,email,password,role,lastactivity) 
-VALUES ( 1, 'Admin', 'Admin','Admin@gmail.com','e64b78fc3bc91bcbc7dc232ba8ec59e0','Admin','2022-09-17 21:53:16.2522')
-```
-<br></br>
-
-<h2>Structure of Project</h2>
-
-In this project, Onion Architecture has been applied as an example of Clean Archtitecture . Firstly, I should have to give credit [Güven Barış Çakan](https://github.com/guvenbaris) and his fellows [Kader Uzuner](https://github.com/KaderUzuner) and [Osman Mahmut Cepoğlu](https://github.com/osmanmahmutcepoglu) since they were an inspiration for
-me to prefer using Onion Architecture.
-
-In Onion Architecture, deeper the layer the fewer dependency it has. Deepest layer which is Domain has no dependency. The layer on Domain which is Application layer has dependency to domain. So outer layer are allowed to reference the layers that are directly below them.   
-<br></br>
-
-[<img src="https://miro.medium.com/max/640/1*0Pg6_UsaKiiEqUV3kf2HXg.png">](http://google.com.au/)
-
-
-**Domain layer**
-
-:arrow_right:Domain has no dependency. It holds application domain objects. Entities are placed here.
-<br></br>
-
-
-**Application layer**
-
-:arrow_right:Application layer holds interfaces and services. Bussiness logic is implemented in this layer. Service interface are kept seperate to ensure loose coupling.
-<br></br>
-
-**Persistence Layer**
-
-:arrow_right:Migrations and database configuration is implemented in this layer. No bussiness logic ismplemented. Only this layer knows database.
-<br></br>
-
-**Infrastructure Layer**
-
-:arrow_right:Log and email service is configured here. No bussiness logic is implemented.
-
-<br></br>
-
-<h2>ER Diagram</h2>
-:arrow_right: Both offer and product has Status field. Status field is true by default. If product is sold or offer is disapproved then status will be false. 
-It can be assumed as active and passive.
-
-<br></br>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
