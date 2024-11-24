@@ -40,8 +40,7 @@ Tools     |
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+Follow steps below to run the application in your local.
 
 ### Prerequisites
 
@@ -50,7 +49,27 @@ To get a local copy up and running follow these simple example steps.
   ```sh
   conda create –name ewarehouse python=3.12.2
   ```
-
+* Install Poetry
+  ```sh
+  pip install poetry
+  ```
+* Install Django with Poetry
+  ```sh
+  poetry add django
+  ```
+* Install Chocolatey on Windows
+* Install Make with Chocolatey
+  ```sh
+  choco install make
+  ```
+* Install Chocolatey on Windows
+* Edit host file in C:\Windows\System32\drivers\etc to let application works multitenant
+  ```sh
+  # To allow the same kube context to work on the host and the container:
+  127.0.0.1 kubernetes.docker.internal
+  127.0.0.1 tenantone.example.com
+  127.0.0.1 tenanttwo.example.com
+  ```
 ### Installation
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
