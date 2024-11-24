@@ -38,7 +38,14 @@ Tools     |
 
 
   **Row-based data segregation:**  
-  It is a strategy used in multi-tenant architectures where each tenant's data is stored in the same database tables, but each row includes a tenant identifier to ensure data segregation. This approach requires careful design and implementation to ensure that data access and security are properly enforced.
+  - It is a strategy used in multi-tenant architectures where each tenant's data is stored in the same database tables, but each row includes a tenant identifier to ensure data segregation. This approach requires careful design and implementation to ensure that data access and security are properly enforced.
+  
+  **Reason for Row Based Data Segregation:**
+  * Cost efficiency: Multiple tenants share the same database instance, reducing the need for additional hardware and software resources.
+  * Lower Maintenance Costs: Managing a single database instance is simpler and cheaper than managing multiple instances.
+  * Dynamic Tenancy: Easily add new tenants without the need for additional database setup.
+  * Tenant-Specific Customization: Easier to implement custom features or settings for specific tenants within the shared environment.
+  * There are some disadvantages of this strategy such as highload by one tenant will affect other tenants too but since we do not foresee a high number of transactions it will be feasible.
 
 
 <br></br>
