@@ -81,6 +81,17 @@ Follow steps below to install and run application in your local.
    ```sh
    npm install
    ```
+3. Open with Vscode
+4. Run commands below on two different terminal
+   ```sh
+   cd backend
+   make run
+   ```
+
+    ```sh
+   cd frontend
+   make run
+   ```
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
