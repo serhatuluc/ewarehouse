@@ -70,7 +70,8 @@ Follow steps below to run the application in your local.
   127.0.0.1 tenantone.example.com
   127.0.0.1 tenanttwo.example.com
   ```
-### Installation
+* Install redux-devtools on your chrome
+## Installation
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
