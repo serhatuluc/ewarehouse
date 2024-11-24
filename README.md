@@ -21,13 +21,9 @@ Technology    | Version
 Tools     | 
 ------------- | 
 [![Bootstrap][Bootstrap]][Bootstrap-url] |
-AutoMapper          | 
-NHibernate    |
-Hangfire    |
-SeriLog    | 
-Nunit    |
-Moq    |
-Mailkit    | 
+[![Redux][Redux]][Redux-url]         | 
+[![Poetry][Poetry]][Poetry-url]     |
+[![PyTest][PyTest]][PyTest-url]     |
 
 
 <br></br>
@@ -105,4 +101,10 @@ It can be assumed as active and passive.
 [PostgreSql-url]: https://www.postgresql.org/
 [Bootstrap]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com/
+[Redux]: https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white
+[Redux-url]: https://redux.js.org/
+[Poetry]: https://img.shields.io/badge/Poetry-%233B82F6.svg?style=for-the-badge&logo=poetry&logoColor=0B3D8D
+[Poetry-url]: https://python-poetry.org/
+[PyTest]: https://img.shields.io/badge/pytest-%23ffffff.svg?style=for-the-badge&logo=pytest&logoColor=2f9fe3
+[PyTest-url]: https://docs.pytest.org/en/stable/
 
